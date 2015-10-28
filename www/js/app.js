@@ -5,27 +5,59 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('todo', ['ionic'])
 
-.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider.state('home', {
-    url: '/',
-    templateUrl: 'home.html'
+  .config(function($stateProvider, $urlRouterProvider) {
+    $stateProvider.state('home', {
+      url: '/',
+      templateUrl: 'home.html',
+      controller: 'HomeCtrl',
+      cache: false
+    });
+    $stateProvider.state('add', {
+      url: '/add',
+      templateUrl: 'add.html',
+      controller: 'AddNewTaskCtrl',
+      cache: false
+    });
+
+    $urlRouterProvider.otherwise('/')
   })
-  $stateProvider.state('add', {
-    url: '/add',
-    templateUrl: 'add.html'
+
+  .factory('Tasks', function() {
+    return {
+      all: function() {
+        var taskString = window.localStorage['tasks'];
+        if(taskString) {
+          return angular.fromJson(taskString);
+        }
+        return [];
+      },
+      save: function(tasks) {
+        window.localStorage['tasks'] = angular.toJson(tasks);
+      },
+      newTask: function(taskTitle) {
+        return {
+          title: taskTitle
+        };
+      }
+    }
   })
 
-  $urlRouterProvider.otherwise('/')
-})
+  .controller('HomeCtrl', function($scope, Tasks) {
+    $scope.tasks = Tasks.all();
+  })
 
-.controller('TodoCtrl', function($scope) {
-  $scope.tasks = [
-    { title: 'First task' },
-    { title: 'Second task' },
-    { title: 'Third task' }
-  ];
-})
-
-.controller('AddNewTaskCtrl', function($scope) {
-  $scope.message = 'Add new task here';
-});
+  .controller('AddNewTaskCtrl', function($scope, Tasks) {
+    var createTask = function(taskTitle) {
+      var newTask = Tasks.newTask(taskTitle);
+      $scope.tasks.push(newTask);
+      Tasks.save($scope.tasks);
+    };
+    $scope.tasks = Tasks.all();
+    $scope.record = { title: "" };
+    $scope.newTask = function(task) {
+      if(!task.title)
+        return;
+      createTask(task.title);
+      $scope.record = { title: "" };
+    };
+  });

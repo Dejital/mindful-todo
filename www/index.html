@@ -28,7 +28,7 @@
 
     <script id="home.html" type="text/ng-template">
       <ion-view view-title="Home">
-        <ion-content class="padding" ng-controller="TodoCtrl">
+        <ion-content class="padding">
           <a class="button button-block button-balanced" href="#/add">
             Add New Task
           </a>
@@ -43,19 +43,13 @@
 
     <script id="add.html" type="text/ng-template">
       <ion-view view-title="Add">
-        <ion-content class="padding" ng-controller="AddNewTaskCtrl">
-          <ion-list>
+        <ion-content class="padding">
+          <form ng-submit="newTask(record)">
             <label class="item item-input">
-              <input type="text" placeholder="Task Name">
+              <input type="text" placeholder="Task Name" ng-model="record.title">
             </label>
-            <label class="item item-input">
-              <input type="text" placeholder="Project">
-            </label>
-            <label class="item item-input">
-              <textarea placeholder="Comments"></textarea>
-            </label>
-            <button class="button button-balanced button-block">Add</button>
-          </ion-list>
+            <button type="submit" class="button button-balanced button-block">Add</button>
+          </form>
         </ion-content>
       </ion-view>
     </script>
