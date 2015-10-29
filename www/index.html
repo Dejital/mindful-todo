@@ -29,11 +29,20 @@
     <script id="home.html" type="text/ng-template">
       <ion-view view-title="Home">
         <ion-content class="padding">
-          <a class="button button-block button-balanced" href="#/add">
-            Add New Task
-          </a>
+          <div class="button-bar">
+            <a class="button button-block button-balanced" href="#/add">
+              Add New Task
+            </a>
+            <a class="button button-block button-balanced" ng-click="onClearComplete()">
+              Clean Up
+            </a>
+          </div>
           <ion-list can-swipe="true">
             <ion-item ng-repeat="task in tasks">
+              <a class="button button-small button-icon icon"
+                 ng-click="onCompleteTask(task)"
+                 ng-class="(task.isComplete) ? 'ion-ios-circle-filled' : 'ion-ios-circle-outline'">
+              </a>
               {{task.title}}
               <ion-option-button class="button-assertive" ng-click="onDeleteTask(task)">
                 Delete

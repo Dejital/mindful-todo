@@ -47,7 +47,8 @@ angular.module('todo', ['ionic'])
       },
       newTask: function(taskTitle) {
         return {
-          title: taskTitle
+          title: taskTitle,
+          isComplete: false
         };
       }
     }
@@ -58,9 +59,25 @@ angular.module('todo', ['ionic'])
       $scope.tasks.splice($scope.tasks.indexOf(task),1);
       Tasks.save($scope.tasks);
     };
+    var clearTasks = function() {
+      var clearedTasks = [];
+      angular.forEach($scope.tasks, function(value, key) {
+        if (!value.isComplete)
+          clearedTasks.push(value);
+      });
+      $scope.tasks = clearedTasks;
+      Tasks.save($scope.tasks);
+    };
     $scope.tasks = Tasks.all();
     $scope.onDeleteTask = function(task) {
       deleteTask(task);
+    };
+    $scope.onCompleteTask = function(task) {
+      task.isComplete = !task.isComplete;
+      Tasks.save($scope.tasks);
+    };
+    $scope.onClearComplete = function() {
+      clearTasks();
     };
   })
 
