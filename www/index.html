@@ -32,9 +32,12 @@
           <a class="button button-block button-balanced" href="#/add">
             Add New Task
           </a>
-          <ion-list>
+          <ion-list can-swipe="true">
             <ion-item ng-repeat="task in tasks">
               {{task.title}}
+              <ion-option-button class="button-assertive" ng-click="onDeleteTask(task)">
+                Delete
+              </ion-option-button>
             </ion-item>
           </ion-list>
         </ion-content>
@@ -44,7 +47,7 @@
     <script id="add.html" type="text/ng-template">
       <ion-view view-title="Add">
         <ion-content class="padding">
-          <form ng-submit="newTask(record)">
+          <form ng-submit="onAddTask(record)">
             <label class="item item-input">
               <input type="text" placeholder="Task Name" ng-model="record.title">
             </label>

@@ -54,7 +54,14 @@ angular.module('todo', ['ionic'])
   })
 
   .controller('HomeCtrl', function($scope, Tasks) {
+    var deleteTask = function(task) {
+      $scope.tasks.splice($scope.tasks.indexOf(task),1);
+      Tasks.save($scope.tasks);
+    };
     $scope.tasks = Tasks.all();
+    $scope.onDeleteTask = function(task) {
+      deleteTask(task);
+    };
   })
 
   .controller('AddNewTaskCtrl', function($scope, Tasks) {
@@ -65,7 +72,7 @@ angular.module('todo', ['ionic'])
     };
     $scope.tasks = Tasks.all();
     $scope.record = { title: "" };
-    $scope.newTask = function(task) {
+    $scope.onAddTask = function(task) {
       if(!task.title)
         return;
       createTask(task.title);
