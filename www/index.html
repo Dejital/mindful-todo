@@ -56,6 +56,12 @@
     <script id="add.html" type="text/ng-template">
       <ion-view view-title="Add">
         <ion-content class="padding">
+          <div class="card" ng-if="message.isVisible">
+            <div class="item item-icon-left">
+              <i class="icon ion-checkmark-round"></i>
+              {{message.text}}
+            </div>
+          </div>
           <form ng-submit="onAddTask(record)">
             <label class="item item-input">
               <input type="text" placeholder="Task Name" ng-model="record.title">

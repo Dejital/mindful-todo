@@ -81,18 +81,27 @@ angular.module('todo', ['ionic'])
     };
   })
 
-  .controller('AddNewTaskCtrl', function($scope, Tasks) {
+  .controller('AddNewTaskCtrl', function($scope, $timeout, Tasks) {
     var createTask = function(taskTitle) {
       var newTask = Tasks.newTask(taskTitle);
       $scope.tasks.push(newTask);
       Tasks.save($scope.tasks);
     };
+    var displayMessage = function(message) {
+      $scope.message.text = message;
+      $scope.message.isVisible = true;
+      $timeout(function() {
+        $scope.message.isVisible = false;
+      }, 2000);
+    };
     $scope.tasks = Tasks.all();
     $scope.record = { title: "" };
+    $scope.message = { text: "", isVisible: false };
     $scope.onAddTask = function(task) {
       if(!task.title)
         return;
       createTask(task.title);
       $scope.record = { title: "" };
+      displayMessage("Task added");
     };
   });
