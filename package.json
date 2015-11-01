@@ -1,7 +1,7 @@
 {
   "name": "mindful-todo",
   "version": "1.0.0",
-  "description": "mindful-todo: An Ionic project",
+  "description": "Mindful productivity app using Ionic Framework.",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^2.0.4",
