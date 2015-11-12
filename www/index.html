@@ -26,50 +26,5 @@
     </ion-nav-bar>
     <ion-nav-view></ion-nav-view>
 
-    <script id="home.html" type="text/ng-template">
-      <ion-view view-title="Home">
-        <ion-content class="padding">
-          <div class="button-bar">
-            <a class="button button-block button-balanced" href="#/add">
-              Add New Task
-            </a>
-            <a class="button button-block button-balanced" ng-click="onClearComplete()">
-              Clean Up
-            </a>
-          </div>
-          <ion-list can-swipe="true">
-            <ion-item ng-repeat="task in tasks">
-              <a class="button button-small button-icon icon"
-                 ng-click="onCompleteTask(task)"
-                 ng-class="(task.isComplete) ? 'ion-ios-circle-filled' : 'ion-ios-circle-outline'">
-              </a>
-              {{task.title}}
-              <ion-option-button class="button-assertive" ng-click="onDeleteTask(task)">
-                Delete
-              </ion-option-button>
-            </ion-item>
-          </ion-list>
-        </ion-content>
-      </ion-view>
-    </script>
-
-    <script id="add.html" type="text/ng-template">
-      <ion-view view-title="Add">
-        <ion-content class="padding">
-          <div class="card" ng-if="message.isVisible">
-            <div class="item item-icon-left">
-              <i class="icon ion-checkmark-round"></i>
-              {{message.text}}
-            </div>
-          </div>
-          <form ng-submit="onAddTask(record)">
-            <label class="item item-input">
-              <input type="text" placeholder="Task Name" ng-model="record.title">
-            </label>
-            <button type="submit" class="button button-balanced button-block">Add</button>
-          </form>
-        </ion-content>
-      </ion-view>
-    </script>
   </body>
 </html>

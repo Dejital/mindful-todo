@@ -19,13 +19,13 @@ angular.module('todo', ['ionic'])
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider.state('home', {
       url: '/',
-      templateUrl: 'home.html',
+      templateUrl: 'templates/home.html',
       controller: 'HomeCtrl',
       cache: false
     });
     $stateProvider.state('add', {
       url: '/add',
-      templateUrl: 'add.html',
+      templateUrl: 'templates/add.html',
       controller: 'AddNewTaskCtrl',
       cache: false
     });
